@@ -40,7 +40,7 @@ extern keymap_config_t keymap_config;
 
 // Enable these functions using FUNC(n) macro.
 const uint16_t PROGMEM fn_actions[] = {
-    [0] = ACTION_LAYER_TAP_KEY(KC_ESC, KC_LCTRL),
+    [0] = ACTION_MODS_TAP_KEY(MOD_LCTL, KC_ESC),
     [1] = ACTION_MODS_KEY(MOD_LSFT, KC_1),
 	[2] = ACTION_MODS_KEY(MOD_LSFT, KC_2),
 	[3] = ACTION_MODS_KEY(MOD_LSFT, KC_3),
@@ -108,7 +108,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   {ESC_CTRL,  KC_A,    KC_R,    KC_S,    KC_T,    KC_D,    KC_H,    KC_N,    KC_E,    KC_I,    KC_O,    KC_ENT},
   {KC_LSFT ,  KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,    KC_K,    KC_M,    KC_COMM, KC_DOT,  KC_SLSH, KC_RSFT },
   {FN      , _______, KC_LGUI, KC_LALT, KC_SPC,   NMPD,     SYM,  KC_BSPC,     NAV, _______,     MEDIA,   PLNCK}
-},
+}, 	
 
 /* Qwerty
  * ,-----------------------------------------------------------------------------------.
@@ -184,7 +184,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 },
 
 [_NMPD] = {
-  {_______, _______, _______, _______, _______, _______, _______, KC_P7, KC_P8, KC_P9, _______, _______},
+  {_______, _______, _______, _______, _______, _______, KC_NLCK, KC_P7, KC_P8, KC_P9, _______, _______},
   {_______, _______, _______, _______, _______, _______, _______, KC_P4, KC_P5, KC_P6, _______, _______},
   {_______, _______, _______, _______, _______, _______, _______, KC_P1, KC_P2, KC_P3, _______, _______},
   {_______, _______, _______, _______, _______, _______, _______, KC_P0, _______, _______, _______, _______}
