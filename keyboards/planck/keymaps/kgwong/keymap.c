@@ -17,57 +17,13 @@
 #include "planck.h"
 #include "action_layer.h"
 
-// Func macro definitions.
-#define ESC_CTRL FUNC(0) // Tap for Esc, hold for CTRL
-#define SYM_1 FUNC(1) // !
-#define SYM_2 FUNC(2) // @
-#define SYM_3 FUNC(3) // #
-#define SYM_4 FUNC(4) // $
-#define SYM_5 FUNC(5) // %
-#define SYM_6 FUNC(6) // ^
-#define SYM_7 FUNC(7) // &
-#define SYM_8 FUNC(8) // *
-#define SYM_9 FUNC(9) // (
-#define SYM_10 FUNC(10) // )
-
-#define SYM_11 FUNC(11) // |
-#define SYM_12 FUNC(12) // +
-#define SYM_13 FUNC(13) // {
-#define SYM_14 FUNC(14) // }
-#define SYM_15 FUNC(15) // _
-
 extern keymap_config_t keymap_config;
-
-// Enable these functions using FUNC(n) macro.
-const uint16_t PROGMEM fn_actions[] = {
-    [0] = ACTION_MODS_TAP_KEY(MOD_LCTL, KC_ESC),
-    [1] = ACTION_MODS_KEY(MOD_LSFT, KC_1),
-	[2] = ACTION_MODS_KEY(MOD_LSFT, KC_2),
-	[3] = ACTION_MODS_KEY(MOD_LSFT, KC_3),
-	[4] = ACTION_MODS_KEY(MOD_LSFT, KC_4),
-	[5] = ACTION_MODS_KEY(MOD_LSFT, KC_5),
-	[6] = ACTION_MODS_KEY(MOD_LSFT, KC_6),
-	[7] = ACTION_MODS_KEY(MOD_LSFT, KC_7),
-	[8] = ACTION_MODS_KEY(MOD_LSFT, KC_8),
-	[9] = ACTION_MODS_KEY(MOD_LSFT, KC_9),
-	[10] = ACTION_MODS_KEY(MOD_LSFT, KC_0),
-	
-	[11] = ACTION_MODS_KEY(MOD_LSFT, KC_BSLASH),
-	[12] = ACTION_MODS_KEY(MOD_LSFT, KC_EQL),
-	[13] = ACTION_MODS_KEY(MOD_LSFT, KC_LBRC),
-	[14] = ACTION_MODS_KEY(MOD_LSFT, KC_RBRC),
-	[15] = ACTION_MODS_KEY(MOD_LSFT, KC_MINS),
-	
- };
 
 enum planck_layers {
   _COLEMAK,
   _QWERTY,
   _DVORAK,
-  //_LOWER,
-  //_RAISE,
   _PLOVER,
-  //_ADJUST
   _FN,
   _NMPD,
   _SYM,
@@ -105,9 +61,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  */
 [_COLEMAK] = {
   {KC_TAB  ,  KC_Q,    KC_W,    KC_F,    KC_P,    KC_G,    KC_J,    KC_L,    KC_U,    KC_Y,    KC_SCLN, KC_QUOT},
-  {ESC_CTRL,  KC_A,    KC_R,    KC_S,    KC_T,    KC_D,    KC_H,    KC_N,    KC_E,    KC_I,    KC_O,    KC_ENT},
+  {CTL_T(KC_ESC),  KC_A,    KC_R,    KC_S,    KC_T,    KC_D,    KC_H,    KC_N,    KC_E,    KC_I,    KC_O,    KC_ENT},
   {KC_LSFT ,  KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,    KC_K,    KC_M,    KC_COMM, KC_DOT,  KC_SLSH, KC_RSFT },
-  {FN      , _______, KC_LGUI, KC_LALT, KC_SPC,   NMPD,     SYM,  KC_BSPC,     NAV, _______,     MEDIA,   PLNCK}
+  {MO(_FN)      , _______, KC_LGUI, KC_LALT, KC_SPC,   MO(_NMPD),     MO(_SYM),  KC_BSPC,     MO(_NAV), _______,     MO(_MEDIA),   MO(_PLNCK)}
 }, 	
 
 /* Qwerty
@@ -191,16 +147,16 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 },
 
 [_SYM] = {
-  {KC_GRV, SYM_1, SYM_2, SYM_3, SYM_4, SYM_5, SYM_6, SYM_7, SYM_8, SYM_9, SYM_10, KC_BSLASH},
-  {_______, _______, _______, _______, _______, _______, _______, KC_EQL, SYM_12, KC_LBRC, KC_RBRC, SYM_11},
-  {_______, _______, _______, _______, _______, _______, _______, KC_MINS, SYM_15, SYM_13, SYM_14, _______},
+  {KC_GRV, S(KC_1), S(KC_2), S(KC_3), S(KC_4), S(KC_5), S(KC_6), S(KC_7), S(KC_8), S(KC_9), S(KC_0), KC_BSLASH},
+  {_______, _______, _______, _______, _______, _______, _______, KC_EQL, S(KC_EQL), KC_LBRC, KC_RBRC, S(KC_BSLASH)},
+  {_______, _______, _______, _______, _______, _______, _______, KC_MINS, S(KC_MINS), S(KC_LBRC), S(KC_RBRC), _______},
   {_______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______}
 },
 
 [_NAV] = {
-  {_______, _______, _______, _______, _______, _______, _______, KC_INS, KC_HOME, KC_PGUP, _______, _______},
+  {_______, _______, _______, _______, _______, _______, _______, KC_HOME, KC_END, KC_PGUP, KC_PGDN, _______},
   {_______, _______, _______, _______, _______, _______,  KC_LEFT, KC_DOWN, KC_UP, KC_RGHT, _______, _______},
-  {_______, _______, _______, _______, _______, _______, _______, KC_DELETE, KC_END, KC_PGDN, _______, _______},
+  {_______, _______, _______, _______, _______, _______, _______, KC_DELETE, _______, KC_INS, _______, _______},
   {_______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______}
 },
 
@@ -283,66 +239,6 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
         #endif
         layer_off(_PLOVER);
       }
-	  return false;
-	case FN:
-      if (record->event.pressed) 
-	  {
-        layer_on(_FN);
-      }
-	  else
-	  {
-		  layer_off(_FN);
-	  }
-	  return false;
-	case NMPD:
-      if (record->event.pressed) 
-	  {
-        layer_on(_NMPD);
-      }
-	  else
-	  {
-		  layer_off(_NMPD);
-	  }
-	  return false;
-	case SYM:
-      if (record->event.pressed) 
-	  {
-        layer_on(_SYM);
-      }
-	  else
-	  {
-		  layer_off(_SYM);
-	  }
-	  return false;
-	case NAV:
-      if (record->event.pressed) 
-	  {
-        layer_on(_NAV);
-      }
-	  else
-	  {
-		  layer_off(_NAV);
-	  }
-      return false;
-	case MEDIA:
-      if (record->event.pressed) 
-	  {
-        layer_on(_MEDIA);
-      }
-	  else
-	  {
-		  layer_off(_MEDIA);
-	  }
-      return false;
-	case PLNCK:
-      if (record->event.pressed) 
-	  {
-        layer_on(_PLNCK);
-      }
-	  else
-	  {
-		  layer_off(_PLNCK);
-	  }
       return false;
   }
   return true;
